@@ -2,29 +2,51 @@
 
 ## 0. Do this first: hosting (this matters more than it looks like it does)
 
-Opening `goat_system_v3.html` directly on your phone (`file://`) will **not** give
-you the real installed-app experience. Service workers require a secure
-context (HTTPS or `localhost`) — from a raw file, the service worker silently
-fails to register, meaning no offline caching and no real "installed app"
-behavior. Add-to-homescreen from a raw file just makes a bookmark shortcut
-that still opens inside Chrome's UI, not a standalone app.
+**If you already uploaded files to GitHub from an earlier version of this
+delivery**: the main file was renamed from `goat_system_v3.html` to
+`index.html` (this also fixes a real bug — the old manifest/service-worker
+referenced a filename that never matched what was actually delivered,
+which could make the service worker fail to install at all). In your
+repo: delete the old `goat_system_v3.html`, and upload the new
+`index.html`, `manifest.json`, and `service-worker.js` to replace the old
+ones. `index.html` is also what makes your site's root URL show the app
+directly instead of this README — GitHub Pages automatically serves
+`index.html` at the root if one exists, otherwise it falls back to
+showing `README.md`, which is why the README appeared instead of the app
+before this fix.
+
+Opening the raw HTML file directly on your phone (`file://`) will **not**
+give you the real installed-app experience. Service workers require a
+secure context (HTTPS or `localhost`) — from a raw file, the service
+worker silently fails to register, meaning no offline caching and no real
+"installed app" behavior. Add-to-homescreen from a raw file just makes a
+bookmark shortcut that still opens inside Chrome's UI, not a standalone
+app.
 
 **The fix costs five minutes and is free: GitHub Pages.**
 
 1. Create a new GitHub repo (public or private both work for Pages).
 2. Upload all 6 files from this delivery into the repo root, keeping the
    names exactly as given:
-   `goat_system_v3.html`, `manifest.json`, `service-worker.js`,
+   `index.html`, `manifest.json`, `service-worker.js`,
    `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`
 3. Repo Settings → Pages → Source: `main` branch, `/ (root)` → Save.
-4. Wait ~1 minute, then visit `https://<your-username>.github.io/<repo-name>/goat_system_v3.html`
-   on your phone.
+4. Wait ~1 minute, then visit `https://<your-username>.github.io/<repo-name>/`
+   on your phone (no filename needed at the end now — `index.html` is
+   the default).
 5. Chrome menu → **Add to Home Screen**. This time it's a real PWA: own
    icon, opens full-screen with no browser chrome, works offline once
    loaded once.
 
 Any other free static host (Netlify, Vercel, Cloudflare Pages) works
 identically — GitHub Pages is just the zero-config option.
+
+**If you already installed the PWA before this fix**: your phone may have
+cached the old, broken version. Clear it once: long-press the app icon →
+App info → Storage → Clear storage, then re-open the URL and re-install.
+The service worker itself is also fixed now (previous version would
+cache-lock forever and never show future updates) — this should be a
+one-time cleanup, not a recurring issue.
 
 ---
 

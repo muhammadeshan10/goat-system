@@ -2,7 +2,7 @@
   "name": "GOAT System",
   "short_name": "GOAT",
   "description": "Personal training, habit, and progress tracking system",
-  "start_url": "./goat.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
