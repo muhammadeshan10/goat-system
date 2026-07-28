@@ -22,7 +22,7 @@
    they change rarely and this keeps load fast. CACHE_NAME is bumped
    again so any partially-broken cache from the filename bug gets torn
    down on next activation regardless. */
-var CACHE_NAME = 'goat-system-v3';
+var CACHE_NAME = 'goat-system-v6-ladder';
 var SHELL_FILES = [
   './index.html',
   './manifest.json',
